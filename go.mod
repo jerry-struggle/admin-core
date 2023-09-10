@@ -1,4 +1,4 @@
-module github.com/admin-core
+module github.com/jerry-struggle/admin-core
 
 go 1.17
 
@@ -9,7 +9,6 @@ require (
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/ghodss/yaml v1.0.0
 	github.com/gin-gonic/gin v1.7.7
-	github.com/go-admin-team/go-admin-core v1.5.1
 	github.com/go-admin-team/redisqueue/v2 v2.0.0
 	github.com/go-redis/redis/v9 v9.0.0-rc.1
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
@@ -34,8 +33,12 @@ require (
 )
 
 require (
+	github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
+	github.com/casbin/casbin/v2 v2.77.2 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/chanxuehong/rand v0.0.0-20211009035549-2f07823e8e99 // indirect
+	github.com/chanxuehong/wechat v0.0.0-20230222024006-36f0325263cd // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -66,7 +69,11 @@ require (
 	github.com/prometheus/procfs v0.6.0 // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
+	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d // indirect
+	github.com/tidwall/gjson v1.14.4 // indirect
+	github.com/tidwall/match v1.1.1 // indirect
+	github.com/tidwall/pretty v1.2.0 // indirect
 	github.com/tsuyoshiwada/go-gitcmd v0.0.0-20180205145712-5f1f5f9475df // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	github.com/urfave/cli v1.20.0 // indirect

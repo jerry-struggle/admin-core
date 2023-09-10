@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/go-admin-team/go-admin-core/storage"
+	"github.com/jerry-struggle/admin-core/storage"
 )
 
 func TestRedis_Append(t *testing.T) {

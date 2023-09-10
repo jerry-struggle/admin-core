@@ -1,5 +1,5 @@
 package sdk
 
-import "github.com/go-admin-team/go-admin-core/sdk/runtime"
+import "github.com/jerry-struggle/admin-core/sdk/runtime"
 
 var Runtime runtime.Runtime = runtime.NewConfig()
