@@ -157,3 +157,7 @@ func (m *Memory) HashMSet(key string, values ...interface{}) error {
 func (m *Memory) Exists(key string) (int64, error) {
 	return 0, nil
 }
+
+func (m *Memory) HashGetAll(key string) (map[string]string, error) {
+	return nil, nil
+}

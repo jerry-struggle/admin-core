@@ -23,6 +23,7 @@ type AdapterCache interface {
 	HashSet(key string, values ...interface{}) error
 	HashMSet(key string, values ...interface{}) error
 	Exists(key string) (int64, error)
+	HashGetAll(key string) (map[string]string, error)
 }
 
 type AdapterQueue interface {

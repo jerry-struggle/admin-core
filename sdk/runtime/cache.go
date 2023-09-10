@@ -98,6 +98,10 @@ func (e Cache) Exists(key string) (int64, error) {
 	return e.store.Exists(e.prefix + intervalTenant + key)
 }
 
+func (e Cache) HashGetAll(key string) (map[string]string, error) {
+	return e.store.HashGetAll(e.prefix + intervalTenant + key)
+}
+
 // Token 获取微信oauth2 token
 func (e Cache) Token() (token *oauth2.Token, err error) {
 	var str string

@@ -92,3 +92,7 @@ func (r *Redis) HashMSet(key string, values ...interface{}) error {
 func (r *Redis) Exists(key string) (int64, error) {
 	return r.client.Exists(context.TODO(), key).Result()
 }
+
+func (r *Redis) HashGetAll(key string) (map[string]string, error) {
+	return r.client.HGetAll(context.TODO(), key).Result()
+}
