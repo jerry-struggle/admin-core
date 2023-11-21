@@ -53,6 +53,8 @@ type Config struct {
 	Cache       *Cache                `yaml:"cache"`
 	Queue       *Queue                `yaml:"queue"`
 	Locker      *Locker               `yaml:"locker"`
+	Sms         *Sms                  `yaml:"sms"`
+	Oss         *Oss                  `yaml:"oss"`
 	Extend      interface{}           `yaml:"extend"`
 }
 

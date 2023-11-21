@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/bsm/redislock"
+	sts "github.com/tencentyun/qcloud-cos-sts-sdk/go"
 )
 
 const (
@@ -52,4 +53,16 @@ type ConsumerFunc func(Messager) error
 type AdapterLocker interface {
 	String() string
 	Lock(key string, ttl int64, options *redislock.Options) (*redislock.Lock, error)
+}
+
+type AdapterSms interface {
+	SendSms(string, string) error
+}
+
+type AdapterOss interface {
+	UpLoad(objectName, localFile string) (string, error)
+	GetCredential() (*sts.CredentialResult, error)
+	GetPresignedURL(objectName string) (string, error)
+	GetSignedFileUrl(dir string, isSign bool) ([]string, []string, error)
+	DownloadFiles(fileObject []string, localDir string) error
 }
