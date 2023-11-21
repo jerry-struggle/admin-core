@@ -1,8 +1,9 @@
 package runtime
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/jerry-struggle/admin-core/logger"
@@ -67,4 +68,10 @@ type Runtime interface {
 	// SetAppRouters set AppRouter
 	SetAppRouters(appRouters func())
 	GetAppRouters() []func()
+
+	GetSmsAdapter() storage.AdapterSms
+	SetSmsAdapter(storage.AdapterSms)
+
+	GetOssAdapter() storage.AdapterOss
+	SetOssAdapter(storage.AdapterOss)
 }
