@@ -12,7 +12,7 @@ func SetStore(s base64Captcha.Store) {
 	base64Captcha.DefaultMemStore = s
 }
 
-//configJsonBody json request body.
+// configJsonBody json request body.
 type configJsonBody struct {
 	Id            string
 	CaptchaType   string
@@ -45,4 +45,20 @@ func DriverDigitFunc() (id, b64s string, err error) {
 // Verify 校验验证码
 func Verify(id, code string, clear bool) bool {
 	return base64Captcha.DefaultMemStore.Verify(id, code, clear)
+}
+
+// 存储手机验证码
+func SetPhone(phone, code string) {
+	base64Captcha.DefaultMemStore.Set(phone, code)
+}
+
+// 校验手机验证码
+func VerifyPhone(phone, code string, clear bool) bool {
+	currCode := base64Captcha.DefaultMemStore.Get(phone, clear)
+	if len(currCode) <= 0 {
+		return false
+	} else if currCode != code {
+		return false
+	}
+	return true
 }
