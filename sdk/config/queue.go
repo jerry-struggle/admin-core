@@ -1,11 +1,12 @@
 package config
 
 import (
-	"github.com/jerry-struggle/admin-core/storage"
-	"github.com/jerry-struggle/admin-core/storage/queue"
+	"time"
+
 	"github.com/go-admin-team/redisqueue/v2"
 	"github.com/go-redis/redis/v9"
-	"time"
+	"github.com/jerry-struggle/admin-core/storage"
+	"github.com/jerry-struggle/admin-core/storage/queue"
 )
 
 type Queue struct {

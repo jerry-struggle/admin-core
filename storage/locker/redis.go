@@ -2,8 +2,9 @@ package locker
 
 import (
 	"context"
-	"github.com/go-redis/redis/v9"
 	"time"
+
+	"github.com/go-redis/redis/v9"
 
 	"github.com/bsm/redislock"
 )

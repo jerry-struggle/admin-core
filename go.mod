@@ -14,7 +14,7 @@ require (
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-admin-team/gorm-adapter/v3 v3.2.1-0.20210902112335-4148cb356a24
 	github.com/go-admin-team/redis-watcher/v2 v2.0.0-20221121052608-058cebff72c2
-	github.com/go-admin-team/redisqueue/v2 v2.0.0-20221119141731-97c556b0d5b7
+	github.com/go-admin-team/redisqueue/v2 v2.0.0
 	github.com/go-playground/locales v0.13.0
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-playground/validator/v10 v10.4.1
@@ -46,6 +46,13 @@ require (
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gorm v1.24.2
 	gorm.io/plugin/dbresolver v1.3.0
+)
+
+require (
+	github.com/clbanning/mxj v1.8.4 // indirect
+	github.com/google/go-querystring v1.0.0 // indirect
+	github.com/mitchellh/mapstructure v1.4.3 // indirect
+	github.com/mozillazg/go-httpheader v0.2.1 // indirect
 )
 
 require (
@@ -100,6 +107,9 @@ require (
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.3 // indirect
 	github.com/smartystreets/assertions v0.0.0-20180927180507-b2de0cb4f26d // indirect
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common v1.0.807
+	github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/sms v1.0.807
+	github.com/tencentyun/cos-go-sdk-v5 v0.7.45
 	github.com/tencentyun/qcloud-cos-sts-sdk v0.0.0-20230907033301-e99498406670 // indirect
 	github.com/tsuyoshiwada/go-gitcmd v0.0.0-20180205145712-5f1f5f9475df // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect

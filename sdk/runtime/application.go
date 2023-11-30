@@ -1,9 +1,10 @@
 package runtime
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"sync"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/jerry-struggle/admin-core/logger"
@@ -28,7 +29,8 @@ type Application struct {
 	routers     []Router
 	configs     map[string]interface{} // 系统参数
 	appRouters  []func()               // app路由
-
+	sms         storage.AdapterSms
+	oss         storage.AdapterOss
 }
 
 type Router struct {
@@ -274,4 +276,24 @@ func (e *Application) SetAppRouters(appRouters func()) {
 // GetAppRouters 获取app的路由
 func (e *Application) GetAppRouters() []func() {
 	return e.appRouters
+}
+
+// SetSmsAdapter 设置短信
+func (e *Application) SetSmsAdapter(c storage.AdapterSms) {
+	e.sms = c
+}
+
+// GetSmsAdapter 获取短信
+func (e *Application) GetSmsAdapter() storage.AdapterSms {
+	return NewSms(e.sms)
+}
+
+// SetSmsAdapter 设置cos
+func (e *Application) SetOssAdapter(c storage.AdapterOss) {
+	e.oss = c
+}
+
+// GetSmsAdapter 获取cos
+func (e *Application) GetOssAdapter() storage.AdapterOss {
+	return NewOss(e.oss)
 }
