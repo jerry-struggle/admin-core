@@ -53,8 +53,8 @@ type Config struct {
 	Cache       *Cache                `yaml:"cache"`
 	Queue       *Queue                `yaml:"queue"`
 	Locker      *Locker               `yaml:"locker"`
-	Sms         *Sms                  `yaml:"sms"`
-	Oss         *Oss                  `yaml:"oss"`
+	Sms         *SmsOption            `yaml:"sms"`
+	Oss         *OssOption            `yaml:"oss"`
 	Extend      interface{}           `yaml:"extend"`
 }
 
@@ -83,6 +83,8 @@ func Setup(s source.Source,
 			Cache:       CacheConfig,
 			Queue:       QueueConfig,
 			Locker:      LockerConfig,
+			Sms:         SmsConfig,
+			Oss:         OssConfig,
 			Extend:      ExtendConfig,
 		},
 		callbacks: fs,
