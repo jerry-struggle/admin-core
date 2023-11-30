@@ -59,14 +59,14 @@ func GetDirFiles(dir string) ([]string, error) {
 
 	for _, file := range dirList {
 		if file.IsDir() {
-			files, err := GetDirFiles(dir + string(os.PathSeparator) + file.Name())
+			files, err := GetDirFiles(dir + "/" + file.Name())
 			if err != nil {
 				return nil, err
 			}
 
 			filesRet = append(filesRet, files...)
 		} else {
-			filesRet = append(filesRet, dir+string(os.PathSeparator)+file.Name())
+			filesRet = append(filesRet, dir+"/"+file.Name())
 		}
 	}
 
@@ -77,7 +77,7 @@ func GetCurrentTimeStamp() int64 {
 	return time.Now().UnixNano() / 1e6
 }
 
-//slice去重
+// slice去重
 func RemoveRepByMap(slc []string) []string {
 	result := []string{}
 	tempMap := map[string]byte{}

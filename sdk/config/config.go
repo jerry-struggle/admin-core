@@ -55,6 +55,8 @@ type Config struct {
 	Locker      *Locker               `yaml:"locker"`
 	Sms         *SmsOption            `yaml:"sms"`
 	Oss         *OssOption            `yaml:"oss"`
+	Smtp        *Smtp                 `yaml:"smtp"`
+	WxPay       *WxPay                `yaml:"wxPay"`
 	Extend      interface{}           `yaml:"extend"`
 }
 
@@ -85,6 +87,8 @@ func Setup(s source.Source,
 			Locker:      LockerConfig,
 			Sms:         SmsConfig,
 			Oss:         OssConfig,
+			Smtp:        SmtpConfig,
+			WxPay:       WxPayConfig,
 			Extend:      ExtendConfig,
 		},
 		callbacks: fs,
