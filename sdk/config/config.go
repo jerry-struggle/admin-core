@@ -57,6 +57,7 @@ type Config struct {
 	Oss         *OssOption            `yaml:"oss"`
 	Smtp        *Smtp                 `yaml:"smtp"`
 	WxPay       *WxPay                `yaml:"wxPay"`
+	Es          *EsOption             `yaml:"es"`
 	Extend      interface{}           `yaml:"extend"`
 }
 
@@ -89,6 +90,7 @@ func Setup(s source.Source,
 			Oss:         OssConfig,
 			Smtp:        SmtpConfig,
 			WxPay:       WxPayConfig,
+			Es:          EsConfig,
 			Extend:      ExtendConfig,
 		},
 		callbacks: fs,

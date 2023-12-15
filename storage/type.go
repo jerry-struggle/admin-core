@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"github.com/jerry-struggle/admin-core/storage/es"
 	"time"
 
 	"github.com/bsm/redislock"
@@ -65,4 +66,12 @@ type AdapterOss interface {
 	GetPresignedURL(objectName string) (string, error)
 	GetSignedFileUrl(dir string, isSign bool) ([]string, []string, error)
 	DownloadFiles(fileObject []string, localDir string) error
+}
+
+type AdapterEs interface {
+	AddRecord(int, string, string, string, string) (string, error)
+	GetRecord(int) (*es.Knowledge, error)
+	UpdateRecord(int, string, string, string, string) error
+	DeleteRecord(int) error
+	PageRecord(int, int, string) ([]int, error)
 }
