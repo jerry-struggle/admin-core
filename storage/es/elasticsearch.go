@@ -14,9 +14,8 @@ type EsOption struct {
 }
 
 func NewEs(esCli *elastic.Client, options *EsOption) (*Elasticsearch, error) {
-	var err error
-	s := &Elasticsearch{Client: esCli, Options: options}
-	s.Client, err = elastic.NewClient(
+
+	client, err := elastic.NewClient(
 		elastic.SetSniff(false),
 		elastic.SetURL(options.Host),
 	)
@@ -24,16 +23,16 @@ func NewEs(esCli *elastic.Client, options *EsOption) (*Elasticsearch, error) {
 		return nil, err
 	}
 	//连接服务测试
-	_, _, err = s.Client.Ping(options.Host).Do(context.Background())
+	_, _, err = client.Ping(options.Host).Do(context.Background())
 	if err != nil {
 		return nil, err
 	}
 	//获取服务端版本号
-	_, err = s.Client.ElasticsearchVersion(options.Host)
+	_, err = client.ElasticsearchVersion(options.Host)
 	if err != nil {
 		return nil, err
 	}
-	return s, nil
+	return &Elasticsearch{Client: client, Options: options}, nil
 }
 
 type Elasticsearch struct {

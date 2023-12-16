@@ -17,21 +17,21 @@ type Es struct {
 }
 
 func (e *Es) AddRecord(id int, title, remark, textData, tags string) (string, error) {
-	return e.AddRecord(id, title, remark, textData, tags)
+	return e.es.AddRecord(id, title, remark, textData, tags)
 }
 
 func (e *Es) GetRecord(id int) (*es.Knowledge, error) {
-	return e.GetRecord(id)
+	return e.es.GetRecord(id)
 }
 
 func (e *Es) UpdateRecord(id int, title, remark, textData, tags string) error {
-	return e.UpdateRecord(id, title, remark, textData, tags)
+	return e.es.UpdateRecord(id, title, remark, textData, tags)
 }
 
 func (e *Es) DeleteRecord(id int) error {
-	return e.DeleteRecord(id)
+	return e.es.DeleteRecord(id)
 }
 
 func (e *Es) PageRecord(size int, page int, keyword string) ([]int, error) {
-	return e.PageRecord(size, page, keyword)
+	return e.es.PageRecord(size, page, keyword)
 }
