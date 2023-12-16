@@ -74,4 +74,7 @@ type Runtime interface {
 
 	GetOssAdapter() storage.AdapterOss
 	SetOssAdapter(storage.AdapterOss)
+
+	GetEsAdapter() storage.AdapterEs
+	SetEsAdapter(storage.AdapterEs)
 }

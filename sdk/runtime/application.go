@@ -31,6 +31,7 @@ type Application struct {
 	appRouters  []func()               // app路由
 	sms         storage.AdapterSms
 	oss         storage.AdapterOss
+	es          storage.AdapterEs
 }
 
 type Router struct {
@@ -296,4 +297,14 @@ func (e *Application) SetOssAdapter(c storage.AdapterOss) {
 // GetSmsAdapter 获取cos
 func (e *Application) GetOssAdapter() storage.AdapterOss {
 	return NewOss(e.oss)
+}
+
+// SetEsAdapter 设置cos
+func (e *Application) SetEsAdapter(c storage.AdapterEs) {
+	e.es = c
+}
+
+// GetEsAdapter 获取cos
+func (e *Application) GetEsAdapter() storage.AdapterEs {
+	return NewEs(e.es)
 }
