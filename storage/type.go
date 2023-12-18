@@ -73,5 +73,5 @@ type AdapterEs interface {
 	GetRecord(int) (*es.Knowledge, error)
 	UpdateRecord(int, string, string, string, string) error
 	DeleteRecord(int) error
-	PageRecord(int, int, string) ([]int, error)
+	PageRecord(int, int, string) (int64, []int, error)
 }

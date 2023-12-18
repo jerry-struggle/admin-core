@@ -112,7 +112,7 @@ func (e *Elasticsearch) DeleteRecord(id int) error {
 }
 
 // 分页
-func (e *Elasticsearch) PageRecord(size int, page int, keyword string) ([]int, error) {
+func (e *Elasticsearch) PageRecord(size int, page int, keyword string) (int64, []int, error) {
 	var res *elastic.SearchResult
 	var err error
 	ids := make([]int, 0)
@@ -123,7 +123,7 @@ func (e *Elasticsearch) PageRecord(size int, page int, keyword string) ([]int, e
 	q.Should(elastic.NewMatchQuery("textData", keyword))
 	res, err = e.Client.Search(e.Options.Index).Query(q).Type(e.Options.Type).Size(size).From((page - 1) * size).Do(context.Background())
 	if err != nil {
-		return ids, err
+		return 0, ids, err
 	}
 	num := res.Hits.TotalHits.Value //搜索到结果总条数
 	if num > 0 {
@@ -132,5 +132,5 @@ func (e *Elasticsearch) PageRecord(size int, page int, keyword string) ([]int, e
 			ids = append(ids, id)
 		}
 	}
-	return ids, nil
+	return num, ids, nil
 }
