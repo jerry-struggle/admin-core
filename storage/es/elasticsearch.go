@@ -65,7 +65,7 @@ func (e *Elasticsearch) GetRecord(id int) (*Knowledge, error) {
 	//通过id查找
 	get1, err := e.Client.Get().Index(e.Options.Index).Type(e.Options.Type).Id(strconv.Itoa(id)).Do(context.Background())
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	var k Knowledge
 	if get1.Found {
@@ -115,16 +115,16 @@ func (e *Elasticsearch) DeleteRecord(id int) error {
 func (e *Elasticsearch) PageRecord(size int, page int, keyword string) ([]int, error) {
 	var res *elastic.SearchResult
 	var err error
+	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
-	q.Must(elastic.NewMatchQuery("title", keyword))
-	q.Must(elastic.NewMatchQuery("remark", keyword))
-	q.Must(elastic.NewMatchQuery("tags", keyword))
-	q.Must(elastic.NewMatchQuery("textData", keyword))
+	q.Should(elastic.NewMatchQuery("title", keyword))
+	q.Should(elastic.NewMatchQuery("remark", keyword))
+	q.Should(elastic.NewMatchQuery("tags", keyword))
+	q.Should(elastic.NewMatchQuery("textData", keyword))
 	res, err = e.Client.Search(e.Options.Index).Query(q).Type(e.Options.Type).Size(size).From((page - 1) * size).Do(context.Background())
 	if err != nil {
-		panic(err)
+		return ids, err
 	}
-	ids := make([]int, 0)
 	num := res.Hits.TotalHits.Value //搜索到结果总条数
 	if num > 0 {
 		for _, hit := range res.Hits.Hits {
