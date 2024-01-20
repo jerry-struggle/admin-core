@@ -26,6 +26,9 @@ type AdapterCache interface {
 	HashMSet(key string, values ...interface{}) error
 	Exists(key string) (int64, error)
 	HashGetAll(key string) (map[string]string, error)
+	LPush(key string, values ...interface{}) (int64, error)
+	RPush(key string, values ...interface{}) (int64, error)
+	LRange(key string, start, stop int64) ([]string, error)
 }
 
 type AdapterQueue interface {

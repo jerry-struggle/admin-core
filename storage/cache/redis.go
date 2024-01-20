@@ -96,3 +96,15 @@ func (r *Redis) Exists(key string) (int64, error) {
 func (r *Redis) HashGetAll(key string) (map[string]string, error) {
 	return r.client.HGetAll(context.TODO(), key).Result()
 }
+
+func (r *Redis) LPush(key string, values ...interface{}) (int64, error) {
+	return r.client.LPush(context.TODO(), key, values).Result()
+}
+
+func (r *Redis) RPush(key string, values ...interface{}) (int64, error) {
+	return r.client.RPush(context.TODO(), key, values).Result()
+}
+
+func (r *Redis) LRange(key string, start, stop int64) ([]string, error) {
+	return r.client.LRange(context.TODO(), key, start, stop).Result()
+}

@@ -161,3 +161,15 @@ func (m *Memory) Exists(key string) (int64, error) {
 func (m *Memory) HashGetAll(key string) (map[string]string, error) {
 	return nil, nil
 }
+
+func (r *Memory) LPush(key string, values ...interface{}) (int64, error) {
+	return 0, nil
+}
+
+func (r *Memory) RPush(key string, values ...interface{}) (int64, error) {
+	return 0, nil
+}
+
+func (r *Memory) LRange(key string, start, stop int64) ([]string, error) {
+	return nil, nil
+}

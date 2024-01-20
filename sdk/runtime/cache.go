@@ -102,6 +102,18 @@ func (e Cache) HashGetAll(key string) (map[string]string, error) {
 	return e.store.HashGetAll(e.prefix + intervalTenant + key)
 }
 
+func (e Cache) LPush(key string, values ...interface{}) (int64, error) {
+	return e.store.LPush(e.prefix+intervalTenant+key, values)
+}
+
+func (e Cache) RPush(key string, values ...interface{}) (int64, error) {
+	return e.store.RPush(e.prefix+intervalTenant+key, values)
+}
+
+func (e Cache) LRange(key string, start, stop int64) ([]string, error) {
+	return e.store.LRange(e.prefix+intervalTenant+key, start, stop)
+}
+
 // Token 获取微信oauth2 token
 func (e Cache) Token() (token *oauth2.Token, err error) {
 	var str string
