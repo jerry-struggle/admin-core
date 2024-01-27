@@ -72,9 +72,9 @@ type AdapterOss interface {
 }
 
 type AdapterEs interface {
-	AddRecord(int, string, string, string, string) (string, error)
-	GetRecord(int) (*es.Knowledge, error)
-	UpdateRecord(int, string, string, string, string) error
-	DeleteRecord(int) error
-	PageRecord(int, int, string) (int64, []int, error)
+	AddRecord(string, int, string, string, string, string) (string, error)
+	GetRecord(string, int) (*es.Knowledge, error)
+	UpdateRecord(string, int, string, string, string, string) error
+	DeleteRecord(string, int) error
+	PageRecord(string, int, int, string) (int64, []int, error)
 }
