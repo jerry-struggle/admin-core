@@ -112,27 +112,24 @@ func (e *Elasticsearch) DeleteRecord(index string, id int) error {
 }
 
 // 列表
-func (e *Elasticsearch) RecordList(index string, keyword string) (int64, []int, error) {
+func (e *Elasticsearch) RecordList(index string, keyword string) ([]int, error) {
 	var res *elastic.SearchResult
 	var err error
 	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
-	q.Should(elastic.NewMatchQuery("title", keyword))
-	q.Should(elastic.NewMatchQuery("remark", keyword))
-	q.Should(elastic.NewMatchQuery("tags", keyword))
-	q.Should(elastic.NewMatchQuery("textData", keyword))
-	res, err = e.Client.Search(index).Query(q).Do(context.Background())
+	q.Must(elastic.NewMatchQuery("title", keyword),
+		elastic.NewMatchQuery("remark", keyword),
+		elastic.NewMatchQuery("tags", keyword),
+		elastic.NewMatchQuery("textData", keyword))
+	res, err = e.Client.Search().Index(index).Query(q).Do(context.Background())
 	if err != nil {
-		return 0, ids, err
+		return ids, err
 	}
-	num := res.Hits.TotalHits.Value //搜索到结果总条数
-	if num > 0 {
-		for _, hit := range res.Hits.Hits {
-			id, _ := strconv.Atoi(hit.Id)
-			ids = append(ids, id)
-		}
+	for _, hit := range res.Hits.Hits {
+		id, _ := strconv.Atoi(hit.Id)
+		ids = append(ids, id)
 	}
-	return num, ids, nil
+	return ids, nil
 }
 
 // 分页
