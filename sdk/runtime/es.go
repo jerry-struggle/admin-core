@@ -36,6 +36,6 @@ func (e *Es) PageRecord(index string, size int, page int, keyword string) (int64
 	return e.es.PageRecord(index, size, page, keyword)
 }
 
-func (e *Es) RecordList(index string, keyword string) (int64, []int, error) {
+func (e *Es) RecordList(index string, keyword string) ([]int, error) {
 	return e.es.RecordList(index, keyword)
 }
