@@ -77,4 +77,5 @@ type AdapterEs interface {
 	UpdateRecord(string, int, string, string, string, string) error
 	DeleteRecord(string, int) error
 	PageRecord(string, int, int, string) (int64, []int, error)
+	RecordList(string, string) (int64, []int, error)
 }

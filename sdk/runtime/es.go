@@ -35,3 +35,7 @@ func (e *Es) DeleteRecord(index string, id int) error {
 func (e *Es) PageRecord(index string, size int, page int, keyword string) (int64, []int, error) {
 	return e.es.PageRecord(index, size, page, keyword)
 }
+
+func (e *Es) RecordList(index string, keyword string) (int64, []int, error) {
+	return e.es.RecordList(index, keyword)
+}
