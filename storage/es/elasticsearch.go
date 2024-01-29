@@ -53,7 +53,7 @@ type Knowledge struct {
 func (e *Elasticsearch) AddRecord(index string, id int, title, remark, textData, tags string) (string, error) {
 	//添加数可以用结构体方式和 json字符串方式
 	p := Knowledge{id, title, remark, textData, tags}
-	put, err := e.Client.Index().Index(e.Options.Index).Type(index).Id(strconv.Itoa(id)).BodyJson(p).Do(context.Background())
+	put, err := e.Client.Index().Index(index).Type(index).Id(strconv.Itoa(id)).BodyJson(p).Do(context.Background())
 	if err != nil {
 		return "", err
 	}
@@ -63,7 +63,7 @@ func (e *Elasticsearch) AddRecord(index string, id int, title, remark, textData,
 // 查询记录
 func (e *Elasticsearch) GetRecord(index string, id int) (*Knowledge, error) {
 	//通过id查找
-	get1, err := e.Client.Get().Index(e.Options.Index).Type(index).Id(strconv.Itoa(id)).Do(context.Background())
+	get1, err := e.Client.Get().Index(index).Type(index).Id(strconv.Itoa(id)).Do(context.Background())
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +92,7 @@ func (e *Elasticsearch) UpdateRecord(index string, id int, title, remark, textDa
 	if tags != "" {
 		data["tags"] = tags
 	}
-	_, err := e.Client.Update().Index(e.Options.Index).Type(index).Id(strconv.Itoa(id)).
+	_, err := e.Client.Update().Index(index).Type(index).Id(strconv.Itoa(id)).
 		Doc(data).
 		Do(context.Background())
 	if err != nil {
@@ -104,7 +104,7 @@ func (e *Elasticsearch) UpdateRecord(index string, id int, title, remark, textDa
 // 删除一条
 func (e *Elasticsearch) DeleteRecord(index string, id int) error {
 	_, err := e.Client.Delete().
-		Index(e.Options.Index).Type(index).Id(strconv.Itoa(id)).Do(context.Background())
+		Index(index).Type(index).Id(strconv.Itoa(id)).Do(context.Background())
 	if err != nil {
 		return err
 	}
@@ -121,7 +121,7 @@ func (e *Elasticsearch) RecordList(index string, keyword string) ([]int, error) 
 		elastic.NewMatchQuery("remark", keyword),
 		elastic.NewMatchQuery("tags", keyword),
 		elastic.NewMatchQuery("textData", keyword))
-	res, err = e.Client.Search().Index(e.Options.Index).Type(index).Query(q).Do(context.Background())
+	res, err = e.Client.Search().Index(index).Type(index).Query(q).Do(context.Background())
 	if err != nil {
 		return ids, err
 	}
@@ -142,7 +142,7 @@ func (e *Elasticsearch) PageRecord(index string, size int, page int, keyword str
 	q.Should(elastic.NewMatchQuery("remark", keyword))
 	q.Should(elastic.NewMatchQuery("tags", keyword))
 	q.Should(elastic.NewMatchQuery("textData", keyword))
-	res, err = e.Client.Search(e.Options.Index).Type(index).Query(q).Size(size).From((page - 1) * size).Do(context.Background())
+	res, err = e.Client.Search(index).Type(index).Query(q).Size(size).From((page - 1) * size).Do(context.Background())
 	if err != nil {
 		return 0, ids, err
 	}
