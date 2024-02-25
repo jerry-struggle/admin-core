@@ -121,12 +121,12 @@ func (e *Elasticsearch) RecordList(index string, keyword string) ([]int, error) 
 		elastic.NewMatchQuery("remark", keyword),
 		elastic.NewMatchQuery("tags", keyword),
 		elastic.NewMatchQuery("textData", keyword))
-	res, err = e.Client.Search().Index(index).Query(q).Size(100).
+	res, err = e.Client.Search().Index(index).Query(q).
 		Sort("title", true).
 		Sort("tags", true).
 		Sort("remark", true).
 		Sort("textData", true).
-		Do(context.Background())
+		Size(100).Do(context.Background())
 	if err != nil {
 		return ids, err
 	}
@@ -147,11 +147,12 @@ func (e *Elasticsearch) PageRecord(index string, size int, page int, keyword str
 		elastic.NewMatchQuery("remark", keyword),
 		elastic.NewMatchQuery("tags", keyword),
 		elastic.NewMatchQuery("textData", keyword))
-	res, err = e.Client.Search().Index(index).Query(q).Size(size).From((page-1)*size).
+	res, err = e.Client.Search().Index(index).Query(q).
 		Sort("title", true).
 		Sort("tags", true).
 		Sort("remark", true).
-		Sort("textData", true).Do(context.Background())
+		Sort("textData", true).
+		From((page - 1) * size).Size(size).Do(context.Background())
 	if err != nil {
 		return 0, ids, err
 	}
