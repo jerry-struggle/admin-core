@@ -73,7 +73,7 @@ type GinJWTMiddleware struct {
 	IdentityHandler func(*gin.Context) interface{}
 
 	// Get the token function
-	GetToken func(string)
+	GetUserToken func(interface{}, string)
 
 	// 关键字段，用于存储用户信息
 	// Set the identity key
@@ -472,8 +472,8 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 		return
 	}
 
-	mw.GetToken(tokenString)
-	
+	mw.GetUserToken(claims["identity"], tokenString)
+
 	// set cookie
 	if mw.SendCookie {
 		maxage := int(expire.Unix() - time.Now().Unix())
