@@ -73,7 +73,7 @@ type GinJWTMiddleware struct {
 	IdentityHandler func(*gin.Context) interface{}
 
 	// Get the token function
-	GetUserToken func(interface{}, string)
+	GetUserToken func(interface{}, string) error
 
 	// 关键字段，用于存储用户信息
 	// Set the identity key
@@ -472,7 +472,11 @@ func (mw *GinJWTMiddleware) LoginHandler(c *gin.Context) {
 		return
 	}
 
-	mw.GetUserToken(claims["identity"], tokenString)
+	err = mw.GetUserToken(claims["identity"], tokenString)
+	if err != nil {
+		mw.unauthorized(c, 400, mw.HTTPStatusMessageFunc(err, c))
+		return
+	}
 
 	// set cookie
 	if mw.SendCookie {
