@@ -117,10 +117,10 @@ func (e *Elasticsearch) RecordList(index string, keyword string) ([]int, error) 
 	var err error
 	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
-	q.Should(elastic.NewMatchQuery("title", keyword),
-		elastic.NewMatchQuery("tags", keyword),
-		elastic.NewMatchQuery("remark", keyword),
-		elastic.NewMatchQuery("textData", keyword))
+	q.Should(elastic.NewMatchQuery("title", keyword).Boost(6),
+		elastic.NewMatchQuery("tags", keyword).Boost(4),
+		elastic.NewMatchQuery("remark", keyword).Boost(2),
+		elastic.NewMatchQuery("textData", keyword).Boost(1))
 	res, err = e.Client.Search().Index(index).Query(q).
 		Size(100).Do(context.Background())
 	if err != nil {
@@ -139,10 +139,10 @@ func (e *Elasticsearch) PageRecord(index string, size int, page int, keyword str
 	var err error
 	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
-	q.Should(elastic.NewMatchQuery("title", keyword),
-		elastic.NewMatchQuery("tags", keyword),
-		elastic.NewMatchQuery("remark", keyword),
-		elastic.NewMatchQuery("textData", keyword))
+	q.Should(elastic.NewMatchQuery("title", keyword).Boost(6),
+		elastic.NewMatchQuery("tags", keyword).Boost(4),
+		elastic.NewMatchQuery("remark", keyword).Boost(2),
+		elastic.NewMatchQuery("textData", keyword).Boost(1))
 	res, err = e.Client.Search().Index(index).Query(q).
 		From((page - 1) * size).Size(size).Do(context.Background())
 	if err != nil {
