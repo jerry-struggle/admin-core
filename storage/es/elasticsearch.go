@@ -118,7 +118,7 @@ func (e *Elasticsearch) RecordList(index string, keyword string) ([]int, error) 
 	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
 	q.Should(elastic.NewMatchQuery("title", keyword).Boost(6),
-		elastic.NewMatchQuery("tags", keyword).Boost(4),
+		elastic.NewMatchQuery("tags", keyword).Boost(3),
 		elastic.NewMatchQuery("remark", keyword).Boost(2),
 		elastic.NewMatchQuery("textData", keyword).Boost(1))
 	res, err = e.Client.Search().Index(index).Query(q).
@@ -140,7 +140,7 @@ func (e *Elasticsearch) PageRecord(index string, size int, page int, keyword str
 	ids := make([]int, 0)
 	q := elastic.NewBoolQuery()
 	q.Should(elastic.NewMatchQuery("title", keyword).Boost(6),
-		elastic.NewMatchQuery("tags", keyword).Boost(4),
+		elastic.NewMatchQuery("tags", keyword).Boost(3),
 		elastic.NewMatchQuery("remark", keyword).Boost(2),
 		elastic.NewMatchQuery("textData", keyword).Boost(1))
 	res, err = e.Client.Search().Index(index).Query(q).
